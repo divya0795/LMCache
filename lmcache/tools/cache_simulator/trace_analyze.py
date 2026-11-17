@@ -36,6 +36,7 @@ import logging
 import struct
 
 # First Party
+from lmcache.cli.commands.base import positive_int
 from lmcache.tools.cache_simulator.lru_cache import LRUCacheFast
 from lmcache.v1.common.custom_types import CBMatchResult
 from lmcache.v1.common.metrics import Metrics
@@ -786,7 +787,7 @@ def add_trace_analyze_arguments(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         "--chunk-size",
         nargs="+",
-        type=int,
+        type=positive_int,
         default=[256],
         metavar="TOKENS",
         help="Chunk size(s) to simulate (default: 256)",

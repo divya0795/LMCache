@@ -37,6 +37,16 @@ def test_capacity_accepts_size_suffixes() -> None:
     assert args.capacity == [64 * 1024, 2**20]
 
 
+@pytest.mark.parametrize("value", ["0", "-16"])
+def test_chunk_size_rejects_non_positive(
+    value: str, capsys: pytest.CaptureFixture[str]
+) -> None:
+    with pytest.raises(SystemExit) as exc:
+        _parse(["-i", str(FIXTURE), "--chunk-size", "4", value])
+    assert exc.value.code == 2
+    assert "--chunk-size" in capsys.readouterr().err
+
+
 def test_end_to_end_writes_report_and_summary(
     tmp_path: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
