@@ -76,7 +76,7 @@ Plugins receive the following environment variables:
 Launch the LMCache MP server with the plugin directory:
 
 ```bash
-python -m lmcache.v1.multiprocess.server \
+lmcache server \
     --host localhost --port 5555 \
     --l1-size-gb 10 \
     --eviction-policy LRU \
@@ -87,7 +87,6 @@ You should see plugin output in the server logs:
 
 ```
 [mp_plugin] Started
-[mp_plugin] MP server: host=localhost  port=5555  chunk_size=256
-[mp_plugin] Storage: L1=10.0GB  eviction=LRU  watermark=0.8
+[mp_plugin] config: {"mp_config": {"transport": "zmq", "host": "localhost", "port": 5555, "chunk_size": 256, ...}, ...}
 [mp_plugin] heartbeat #0
 ```
